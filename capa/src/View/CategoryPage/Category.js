@@ -18,19 +18,21 @@ const CategoryContainer = styled.div`
 `;
 
 const Category = () => {
-  const [Method, setMethod] = useState('');
-
-  const handleCheckBoxMethod = () => {
-    axios.get('http://localhost:4000/requests').then((res) => {
-      let filtered = res.data.map((el) => el.method).flat();
-      let filteredData = filtered.filter((el, i) => filtered.indexOf(el) === i);
-      console.log(filteredData);
-    });
-  };
+  const [Method, setMethod] = useState([]);
 
   useEffect(() => {
     handleCheckBoxMethod();
   }, []);
+
+  const handleCheckBoxMethod = () => {
+    axios.get('http://localhost:4000/requests').then((res) => {
+      let filtered = res.data.map((el) => el.method).flat();
+      let filteredMethodData = filtered.filter((el, i) => {
+        return filtered.indexOf(el) === i;
+      });
+      setMethod(filteredMethodData);
+    });
+  };
 
   return (
     <CategoryContainer>
@@ -49,10 +51,19 @@ const Category = () => {
             <FontAwesomeIcon className="method__arrow" icon={faSortDown} />
           </label>
           <div className="method__body">
-            <input type="checkbox" id="method__body__checkbox" />
-            <label htmlFor="method__body__checkbox" className="method__label">
-              ㅋㅋㅋ
-            </label>
+            {Method.map((el, i) => {
+              return (
+                <div key={i}>
+                  <input type="checkbox" id="method__body__checkbox" />
+                  <label
+                    htmlFor="method__body__checkbox"
+                    className="method__label"
+                  >
+                    {el}
+                  </label>
+                </div>
+              );
+            })}
           </div>
         </div>
       </form>
