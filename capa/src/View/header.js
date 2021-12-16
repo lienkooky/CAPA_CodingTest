@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { faGopuram } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const NavBar = styled.div`
+  position: relative;
   background-color: #4460bd;
   display: flex;
   justify-content: space-between;
@@ -23,19 +26,15 @@ const NavBar = styled.div`
   > .navbar__right {
     display: flex;
     align-items: center;
-    position: relative;
+
     > .navbar__menu {
       padding: 0 20px;
+      border-right: 3px solid #fff;
+      > .menu__icon {
+        margin-right: 8px;
+      }
     }
-    > .navbar__menu::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 20px;
-      height: 20px;
-      color: #000;
-    }
+
     > .navbar__logout {
       padding: 0 20px;
     }
@@ -51,7 +50,10 @@ const header = () => {
           <div className="navbar__name"> 파트너스</div>
         </div>
         <div className="navbar__right">
-          <div className="navbar__menu">이미지 A 가공 업체</div>
+          <div className="navbar__menu">
+            <FontAwesomeIcon icon={faGopuram} className="menu__icon" /> A 가공
+            업체
+          </div>
           <div className="navbar__logout">로그아웃</div>
         </div>
       </NavBar>
