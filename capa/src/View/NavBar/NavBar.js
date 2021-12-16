@@ -41,7 +41,7 @@ const NavBar = styled.div`
   }
 `;
 
-const header = () => {
+const Navbar = () => {
   return (
     <>
       <NavBar>
@@ -61,4 +61,4 @@ const header = () => {
   );
 };
 
-export default header;
+export default Navbar;
