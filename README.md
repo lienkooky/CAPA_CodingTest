@@ -103,3 +103,50 @@ const handleAllCheck = useCallback(
   [Method, Material]
 );
 ```
+
+### 21.12.17
+
+<br/>
+
+> Problem
+
+- 가공방식, 재료가 2개 이상일 경우 띄어쓰기 및 쉼표해주어야 함.
+
+> Solve
+
+- 로직이 좋은 것은 아니나 계속 시도해봤는데 마땅히 좋은 로직이 떠오르지 않아서 강제로 데이터를 뽑음.
+
+```js
+// 가공방식이 2개 이상일 경우
+const longMethod = AllData.map((el) => {
+  let result = [];
+  if (el.method.length > 1) {
+    result.push(el.method);
+  }
+  return result[0];
+});
+
+// 재료가 2개 이상일 경우
+const longMaterial = AllData.map((el) => {
+  let result = [];
+  if (el.material.length > 1) {
+    result.push(el.material);
+  }
+  return result;
+});
+let MaterialLong = [];
+for (let i = 0; i < longMaterial.length; i++) {
+  if (longMaterial[i].length) {
+    MaterialLong.push(longMaterial[i]);
+  }
+}
+let MaterialFlat = MaterialLong.flat(Infinity);
+
+{
+  /* 대입 결과 */
+}
+<>
+  <span>{el.method.length > 1 ? longMethod[0].join(', ') : el.method}</span>
+  <span>{el.material.length > 1 ? MaterialFlat.join(', ') : el.material}</span>
+</>;
+```
