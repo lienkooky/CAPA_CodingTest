@@ -66,3 +66,40 @@ const handleSingleCheck = useCallback(
   [Checked]
 );
 ```
+
+### 21.12.16
+
+<br/>
+
+> Problem
+
+- 선택된 checkbox를 해제시키려는 의도.
+
+> Solve
+
+- 출처는 팀 프로젝트에서 사용한 것을 인용함.
+
+```js
+{
+  /*
+새로운 배열을 선언하고, checked가 true라면 선택된 값을 배열에 담아준다.
+checked가 false라면 빈 배열을 리턴한다.
+*/
+}
+const handleAllCheck = useCallback(
+  (checked) => {
+    if (checked) {
+      const MethodCheckedList = [];
+      const MaterialCheckedList = [];
+      Method.forEach((list) => MethodCheckedList.push(list));
+      setMethodChecked(MethodCheckedList);
+      Material.forEach((list) => MaterialCheckedList.push(list));
+      setMaterialChecked(MaterialCheckedList);
+    } else {
+      setMethodChecked([]);
+      setMaterialChecked([]);
+    }
+  },
+  [Method, Material]
+);
+```
