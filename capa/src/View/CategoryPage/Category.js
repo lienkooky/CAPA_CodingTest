@@ -4,6 +4,7 @@ import axios from 'axios';
 import { faRedoAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortDown } from '@fortawesome/free-solid-svg-icons';
+import Toggle from './Sections/Toggle';
 
 const CategoryContainer = styled.div`
   width: 1540px;
@@ -15,25 +16,30 @@ const CategoryContainer = styled.div`
   > p {
     margin-top: -1rem;
   }
-  > .category {
+  .category__toggle {
+    display: flex;
+    justify-content: space-between;
+  }
+  .category {
     display: flex;
     position: relative;
     > .filtering {
       position: absolute;
+      width: 50%;
       top: 0.3rem;
       left: 13rem;
-      margin-left: 25px;
+      margin-left: 20px;
       color: #58b0f6;
-      font-size: 11px;
+      font-size: 12px;
       cursor: pointer;
       &:hover {
         transform: scale(1.1);
       }
-    }
-    > .reset {
-      margin-right: 10px;
-      color: #2096f3;
-      font-size: 16px;
+      > .reset {
+        margin-right: 10px;
+        color: #2096f3;
+        font-size: 16px;
+      }
     }
   }
 `;
@@ -147,114 +153,122 @@ const Category = () => {
     <CategoryContainer>
       <h2>들어온 요청</h2>
       <p>파트너님에게 딱 맞는 요청서를 찾아보세요.</p>
-      <div className="category">
-        <MethodContainer>
-          <form>
-            <div className="method checkbox">
-              <input
-                type="checkbox"
-                id="method__title__input"
-                className="method__button"
-                style={{ display: 'none' }}
-                onClick={handleMethodClick}
-              />
-              <label htmlFor="method__title__input" className="method__input">
-                <div className="method__title">
-                  가공방식
-                  {MethodChecked.length !== 0
-                    ? `(${MethodChecked.length})`
-                    : null}
-                </div>
-                <FontAwesomeIcon className="method__arrow" icon={faSortDown} />
-              </label>
-              {MethodIsOpen === true ? (
-                <div className="method__body">
-                  {Method.map((el, i) => {
-                    return (
-                      <div key={i}>
-                        <input
-                          type="checkbox"
-                          id="method__body__checkbox"
-                          value={el}
-                          onChange={(e) =>
-                            handleSingleMethodCheck(e.target.checked, el)
-                          }
-                          checked={MethodChecked.includes(el) ? true : false}
-                        />
-                        <label
-                          htmlFor="method__body__checkbox"
-                          className="method__label"
-                        >
-                          {el}
-                        </label>
-                      </div>
-                    );
-                  })}
-                </div>
-              ) : null}
-            </div>
-          </form>
-        </MethodContainer>
-        <MaterialContainer>
-          <form>
-            <div className="material checkbox">
-              <input
-                type="checkbox"
-                id="material__title__input"
-                className="material__button"
-                style={{ display: 'none' }}
-                onClick={handleMaterialClick}
-              />
-              <label
-                htmlFor="material__title__input"
-                className="material__input"
-              >
-                <div className="material__title">
-                  재료
-                  {MaterialChecked.length !== 0
-                    ? `(${MaterialChecked.length})`
-                    : null}
-                </div>
-                <FontAwesomeIcon
-                  className="material__arrow"
-                  icon={faSortDown}
+      <div className="category__toggle">
+        <div className="category">
+          <MethodContainer>
+            <form>
+              <div className="method checkbox">
+                <input
+                  type="checkbox"
+                  id="method__title__input"
+                  className="method__button"
+                  style={{ display: 'none' }}
+                  onClick={handleMethodClick}
                 />
-              </label>
-              {MaterialIsOpen === true ? (
-                <div className="material__body">
-                  {Material.map((el, i) => {
-                    return (
-                      <div key={i}>
-                        <input
-                          type="checkbox"
-                          id="material__body__checkbox"
-                          value={el}
-                          onChange={(e) =>
-                            handleSingleMaterialCheck(e.target.checked, el)
-                          }
-                          checked={MaterialChecked.includes(el) ? true : false}
-                        />
-                        <label
-                          htmlFor="material__body__checkbox"
-                          className="material__label"
-                        >
-                          {el}
-                        </label>
-                      </div>
-                    );
-                  })}
-                </div>
-              ) : null}
-            </div>
-          </form>
-        </MaterialContainer>
-        <div
-          className="filtering"
-          onClick={(e) => handleAllCheck(e.target.checked)}
-        >
-          <FontAwesomeIcon icon={faRedoAlt} className="reset" />
-          필터링 리셋
+                <label htmlFor="method__title__input" className="method__input">
+                  <div className="method__title">
+                    가공방식
+                    {MethodChecked.length !== 0
+                      ? `(${MethodChecked.length})`
+                      : null}
+                  </div>
+                  <FontAwesomeIcon
+                    className="method__arrow"
+                    icon={faSortDown}
+                  />
+                </label>
+                {MethodIsOpen === true ? (
+                  <div className="method__body">
+                    {Method.map((el, i) => {
+                      return (
+                        <div key={i}>
+                          <input
+                            type="checkbox"
+                            id="method__body__checkbox"
+                            value={el}
+                            onChange={(e) =>
+                              handleSingleMethodCheck(e.target.checked, el)
+                            }
+                            checked={MethodChecked.includes(el) ? true : false}
+                          />
+                          <label
+                            htmlFor="method__body__checkbox"
+                            className="method__label"
+                          >
+                            {el}
+                          </label>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : null}
+              </div>
+            </form>
+          </MethodContainer>
+          <MaterialContainer>
+            <form>
+              <div className="material checkbox">
+                <input
+                  type="checkbox"
+                  id="material__title__input"
+                  className="material__button"
+                  style={{ display: 'none' }}
+                  onClick={handleMaterialClick}
+                />
+                <label
+                  htmlFor="material__title__input"
+                  className="material__input"
+                >
+                  <div className="material__title">
+                    재료
+                    {MaterialChecked.length !== 0
+                      ? `(${MaterialChecked.length})`
+                      : null}
+                  </div>
+                  <FontAwesomeIcon
+                    className="material__arrow"
+                    icon={faSortDown}
+                  />
+                </label>
+                {MaterialIsOpen === true ? (
+                  <div className="material__body">
+                    {Material.map((el, i) => {
+                      return (
+                        <div key={i}>
+                          <input
+                            type="checkbox"
+                            id="material__body__checkbox"
+                            value={el}
+                            onChange={(e) =>
+                              handleSingleMaterialCheck(e.target.checked, el)
+                            }
+                            checked={
+                              MaterialChecked.includes(el) ? true : false
+                            }
+                          />
+                          <label
+                            htmlFor="material__body__checkbox"
+                            className="material__label"
+                          >
+                            {el}
+                          </label>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : null}
+              </div>
+            </form>
+          </MaterialContainer>
+          <div
+            className="filtering"
+            onClick={(e) => handleAllCheck(e.target.checked)}
+          >
+            <FontAwesomeIcon icon={faRedoAlt} className="reset" />
+            필터링 리셋
+          </div>
         </div>
+        <Toggle />
       </div>
     </CategoryContainer>
   );
