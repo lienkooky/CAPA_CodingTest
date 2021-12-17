@@ -57,6 +57,9 @@ const ItemContainer = styled.div`
       border: 1.5px solid #ffa611;
       border-radius: 20px;
       color: #ffa611;
+      &.control {
+        display: none;
+      }
     }
     .item__customer {
       padding-top: 15px;
@@ -121,165 +124,99 @@ const ItemContainer = styled.div`
   }
 `;
 
-const Item = () => {
+const Item = ({ AllData, isOn }) => {
+  const Selling = AllData.map((el) => el.status);
+  console.log(isOn);
+  // 가공방식이 2개 이상일 경우
+  const longMethod = AllData.map((el) => {
+    let result = [];
+    if (el.method.length > 1) {
+      result.push(el.method);
+    }
+    return result[0];
+  });
+
+  const ItemTemplate = AllData.map((el) => {
+    return (
+      <div className="item__wrap" key={el.id}>
+        <div className="item__title">
+          <h3>{el.title}</h3>
+          <span
+            className={
+              el.status === '대기중'
+                ? 'item__counselling control'
+                : 'item__counselling'
+            }
+          >
+            {el.status}
+          </span>
+          <span className="item__customer">{el.client}</span>
+          <span className="item__time">{el.due}까지 납기</span>
+        </div>
+        <div className="item__content">
+          <div className="item__content__name">
+            <span>도면개수</span>
+            <span>총 수량</span>
+            <span>가공방식</span>
+            <span>재료</span>
+          </div>
+          <div className="item__content__amount">
+            <span>{el.count}개</span>
+            <span>{el.amount}개</span>
+            <span>
+              {el.method.length > 1 ? longMethod[0].join(', ') : el.method}
+            </span>
+            <span>{el.material}</span>
+          </div>
+        </div>
+        <div className="item__btn">
+          <button className="item__btn__more">요청 내역 보기</button>
+          <button className="item__btn__chat">채팅하기</button>
+        </div>
+      </div>
+    );
+  });
+
   return (
     <ItemContainer>
-      <div className="item__wrap">
-        <div className="item__title">
-          <h3>제목이 들어갑니다.</h3>
-          <span className="item__counselling">상담중</span>
-          <span className="item__customer">고객사가 들어갑니다.</span>
-          <span className="item__time">2021. 01. 10까지 납기</span>
-        </div>
-        <div className="item__content">
-          <div className="item__content__name">
-            <span>도면개수</span>
-            <span>총 수량</span>
-            <span>가공방식</span>
-            <span>재료</span>
-          </div>
-          <div className="item__content__amount">
-            <span>2개</span>
-            <span>100개</span>
-            <span>밀링, 선반</span>
-            <span>알류미늄</span>
-          </div>
-        </div>
-        <div className="item__btn">
-          <button className="item__btn__more">요청 내역 보기</button>
-          <button className="item__btn__chat">채팅하기</button>
-        </div>
-      </div>
-      <div className="item__wrap">
-        <div className="item__title">
-          <h3>제목이 들어갑니다.</h3>
-          <span className="item__counselling">상담중</span>
-          <span className="item__customer">고객사가 들어갑니다.</span>
-          <span className="item__time">날짜가 들어갑니다.</span>
-        </div>
-        <div className="item__content">
-          <div className="item__content__name">
-            <span>도면개수</span>
-            <span>총 수량</span>
-            <span>가공방식</span>
-            <span>재료</span>
-          </div>
-          <div className="item__content__amount">
-            <span>2개</span>
-            <span>100개</span>
-            <span>밀링, 선반</span>
-            <span>알류미늄</span>
-          </div>
-        </div>
-        <div className="item__btn">
-          <button className="item__btn__more">요청 내역 보기</button>
-          <button className="item__btn__chat">채팅하기</button>
-        </div>
-      </div>
-      <div className="item__wrap">
-        <div className="item__title">
-          <h3>제목이 들어갑니다.</h3>
-          <span className="item__counselling">상담중</span>
-          <span className="item__customer">고객사가 들어갑니다.</span>
-          <span className="item__time">날짜가 들어갑니다.</span>
-        </div>
-        <div className="item__content">
-          <div className="item__content__name">
-            <span>도면개수</span>
-            <span>총 수량</span>
-            <span>가공방식</span>
-            <span>재료</span>
-          </div>
-          <div className="item__content__amount">
-            <span>2개</span>
-            <span>100개</span>
-            <span>밀링, 선반</span>
-            <span>알류미늄</span>
-          </div>
-        </div>
-        <div className="item__btn">
-          <button className="item__btn__more">요청 내역 보기</button>
-          <button className="item__btn__chat">채팅하기</button>
-        </div>
-      </div>
-      <div className="item__wrap">
-        <div className="item__title">
-          <h3>제목이 들어갑니다.</h3>
-          <span className="item__counselling">상담중</span>
-          <span className="item__customer">고객사가 들어갑니다.</span>
-          <span className="item__time">날짜가 들어갑니다.</span>
-        </div>
-        <div className="item__content">
-          <div className="item__content__name">
-            <span>도면개수</span>
-            <span>총 수량</span>
-            <span>가공방식</span>
-            <span>재료</span>
-          </div>
-          <div className="item__content__amount">
-            <span>2개</span>
-            <span>100개</span>
-            <span>밀링, 선반</span>
-            <span>알류미늄</span>
-          </div>
-        </div>
-        <div className="item__btn">
-          <button className="item__btn__more">요청 내역 보기</button>
-          <button className="item__btn__chat">채팅하기</button>
-        </div>
-      </div>
-      <div className="item__wrap">
-        <div className="item__title">
-          <h3>제목이 들어갑니다.</h3>
-          <span className="item__counselling">상담중</span>
-          <span className="item__customer">고객사가 들어갑니다.</span>
-          <span className="item__time">날짜가 들어갑니다.</span>
-        </div>
-        <div className="item__content">
-          <div className="item__content__name">
-            <span>도면개수</span>
-            <span>총 수량</span>
-            <span>가공방식</span>
-            <span>재료</span>
-          </div>
-          <div className="item__content__amount">
-            <span>2개</span>
-            <span>100개</span>
-            <span>밀링, 선반</span>
-            <span>알류미늄</span>
-          </div>
-        </div>
-        <div className="item__btn">
-          <button className="item__btn__more">요청 내역 보기</button>
-          <button className="item__btn__chat">채팅하기</button>
-        </div>
-      </div>
-      <div className="item__wrap">
-        <div className="item__title">
-          <h3>제목이 들어갑니다.</h3>
-          <span className="item__counselling">상담중</span>
-          <span className="item__customer">고객사가 들어갑니다.</span>
-          <span className="item__time">날짜가 들어갑니다.</span>
-        </div>
-        <div className="item__content">
-          <div className="item__content__name">
-            <span>도면개수</span>
-            <span>총 수량</span>
-            <span>가공방식</span>
-            <span>재료</span>
-          </div>
-          <div className="item__content__amount">
-            <span>2개</span>
-            <span>100개</span>
-            <span>밀링, 선반</span>
-            <span>알류미늄</span>
-          </div>
-        </div>
-        <div className="item__btn">
-          <button className="item__btn__more">요청 내역 보기</button>
-          <button className="item__btn__chat">채팅하기</button>
-        </div>
-      </div>
+      {isOn
+        ? AllData.map((el) => {
+            if (el.status === '상담중') {
+              return (
+                <div className="item__wrap" key={el.id}>
+                  <div className="item__title">
+                    <h3>{el.title}</h3>
+                    <span className="item__counselling">{el.status}</span>
+                    <span className="item__customer">{el.client}</span>
+                    <span className="item__time">{el.due}까지 납기</span>
+                  </div>
+                  <div className="item__content">
+                    <div className="item__content__name">
+                      <span>도면개수</span>
+                      <span>총 수량</span>
+                      <span>가공방식</span>
+                      <span>재료</span>
+                    </div>
+                    <div className="item__content__amount">
+                      <span>{el.count}개</span>
+                      <span>{el.amount}개</span>
+                      <span>
+                        {el.method.length > 1
+                          ? longMethod[0].join(', ')
+                          : el.method}
+                      </span>
+                      <span>{el.material}</span>
+                    </div>
+                  </div>
+                  <div className="item__btn">
+                    <button className="item__btn__more">요청 내역 보기</button>
+                    <button className="item__btn__chat">채팅하기</button>
+                  </div>
+                </div>
+              );
+            }
+          })
+        : ItemTemplate}
     </ItemContainer>
   );
 };

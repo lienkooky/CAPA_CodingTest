@@ -21,8 +21,8 @@ const ToggleContainer = styled.div`
   }
   > .toggle-circle {
     position: absolute;
-    top: 2px;
-    left: 0px;
+    top: 4px;
+    left: -1px;
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -32,7 +32,7 @@ const ToggleContainer = styled.div`
     transition: all 0.25s ease;
     box-sizing: border-box;
     &.toggle--checked {
-      left: 17px;
+      left: 18px;
       background-color: #2096f3;
       border: 1px solid #2096f3;
     }
@@ -43,13 +43,7 @@ const ToggleContainer = styled.div`
   }
 `;
 
-const Toggle = () => {
-  const [isOn, setisOn] = useState(false);
-
-  const toggleHandler = () => {
-    setisOn(!isOn);
-  };
-
+const Toggle = ({ toggleHandler, isOn }) => {
   return (
     <>
       <ToggleContainer onClick={toggleHandler}>

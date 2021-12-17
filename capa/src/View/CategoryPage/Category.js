@@ -44,7 +44,7 @@ const CategoryContainer = styled.div`
   }
 `;
 
-const Category = () => {
+const Category = ({ toggleHandler, isOn }) => {
   const [Method, setMethod] = useState([]);
   const [Material, setMaterial] = useState([]);
   const [MethodIsOpen, setMethodIsOpen] = useState(false);
@@ -268,7 +268,7 @@ const Category = () => {
             필터링 리셋
           </div>
         </div>
-        <Toggle />
+        <Toggle toggleHandler={toggleHandler} isOn={isOn} />
       </div>
     </CategoryContainer>
   );
@@ -323,6 +323,8 @@ const MethodContainer = styled.div`
     border: 1px solid #939fa5;
     border-radius: 5px;
     cursor: pointer;
+    background-color: #fff;
+    z-index: 2;
   }
 
   .method__label {
@@ -376,7 +378,8 @@ const MaterialContainer = styled.div`
     text-align: center;
   }
   .material__body {
-    margin-top: 0.2rem;
+    position: absolute;
+    top: 2rem;
     padding: 5px 10px;
     width: 130px;
     display: flex;
@@ -386,6 +389,8 @@ const MaterialContainer = styled.div`
     border-radius: 5px;
     cursor: pointer;
     box-sizing: border-box;
+    z-index: 2;
+    background-color: #fff;
   }
 
   .material__label {
