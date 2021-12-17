@@ -66,7 +66,7 @@ const MethodContainer = styled.div`
   }
 `;
 
-const MethodCategory = ({ Method }) => {
+const MethodCategory = ({ Method, handleFilterClick }) => {
   const [IsOpen, setIsOpen] = useState(false);
   const [Checked, setChecked] = useState([]);
 
@@ -112,7 +112,8 @@ const MethodCategory = ({ Method }) => {
           />
           <label htmlFor="method__title__input" className="method__input">
             <div className="method__title">
-              가공방식{IsOpen ? `(${Checked.length})` : null}
+              가공방식
+              {Checked.length !== 0 ? `(${Checked.length})` : null}
             </div>
             <FontAwesomeIcon className="method__arrow" icon={faSortDown} />
           </label>
@@ -127,6 +128,7 @@ const MethodCategory = ({ Method }) => {
                       value={el}
                       onChange={(e) => handleSingleCheck(e.target.checked, el)}
                       checked={Checked.includes(el) ? true : false}
+                      onClick={handleFilterClick}
                     />
                     <label
                       htmlFor="method__body__checkbox"

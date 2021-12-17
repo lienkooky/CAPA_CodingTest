@@ -68,7 +68,7 @@ const MaterialContainer = styled.div`
 
 const MaterialCategory = ({ Material }) => {
   const [IsOpen, setIsOpen] = useState(false);
-  const [Checked, setChecked] = useState([]);
+  const [MaterialChecked, setMaterialChecked] = useState([]);
 
   const handleMaterialClick = () => {
     const materialTitle = document.querySelector('.material__input');
@@ -81,22 +81,18 @@ const MaterialCategory = ({ Material }) => {
       materialTitle.style.backgroundColor = '#1464c0';
       materialText.style.color = '#fff';
       materialArrow.style.color = '#fff';
-    } else {
-      materialTitle.style.backgroundColor = 'transparent';
-      materialText.style.color = '#333';
-      materialArrow.style.color = '#939fa5';
     }
   };
 
   const handleSingleCheck = useCallback(
     (checked, list) => {
       if (checked) {
-        setChecked([...Checked, list]);
+        setMaterialChecked([...MaterialChecked, list]);
       } else {
-        setChecked(Checked.filter((el) => el !== list));
+        setMaterialChecked(MaterialChecked.filter((el) => el !== list));
       }
     },
-    [Checked]
+    [MaterialChecked]
   );
 
   return (
@@ -112,7 +108,10 @@ const MaterialCategory = ({ Material }) => {
           />
           <label htmlFor="material__title__input" className="material__input">
             <div className="material__title">
-              재료{IsOpen ? `(${Checked.length})` : null}
+              재료
+              {MaterialChecked.length !== 0
+                ? `(${MaterialChecked.length})`
+                : null}
             </div>
             <FontAwesomeIcon className="material__arrow" icon={faSortDown} />
           </label>
@@ -126,7 +125,7 @@ const MaterialCategory = ({ Material }) => {
                       id="material__body__checkbox"
                       value={el}
                       onChange={(e) => handleSingleCheck(e.target.checked, el)}
-                      checked={Checked.includes(el) ? true : false}
+                      checked={MaterialChecked.includes(el) ? true : false}
                     />
                     <label
                       htmlFor="material__body__checkbox"
