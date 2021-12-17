@@ -6,6 +6,7 @@ const ToggleContainer = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
+
   cursor: pointer;
   > .toggle-container {
     width: 40px;
