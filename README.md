@@ -104,8 +104,6 @@ const handleAllCheck = useCallback(
 );
 ```
 
-### 21.12.17
-
 <br/>
 
 > Problem
