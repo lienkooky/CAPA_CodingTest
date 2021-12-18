@@ -185,14 +185,18 @@ const Item = ({ AllData, isOn, MethodChecked, MaterialChecked }) => {
     result = result.filter((el) => {
       for (let i = 0; i < PlusData.length; i++) {
         if (PlusData[i] === '') continue;
-        if (PlusData[i] === el.method[i]) return el;
-        if (PlusData[i] === el.material[i]) return el;
-        if (PlusData[i] === el.method[i] && PlusData[i] === el.material)
+        else if (PlusData[i] === el.method[i] && PlusData[i] === el.material) {
           return el;
+        } else if (PlusData[i] === el.method[i]) return el;
+        else if (PlusData[i] === el.material[i]) return el;
       }
     });
+    console.log(result);
     setData(result);
   }, [PlusData]);
+
+  console.log(Data);
+  console.log(PlusData);
 
   // 가공방식, 재료가 2개 이상일 경우
   const longMethod = Data.map((el) => {

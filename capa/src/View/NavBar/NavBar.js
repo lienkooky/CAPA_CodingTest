@@ -98,14 +98,14 @@ const Navbar = () => {
                 <div className="item__logo">CAPA</div>
                 <div className="item__name"> 파트너스</div>
               </div>
-              <div class="item">
+              <div className="item">
                 <FontAwesomeIcon
                   icon={faGopuram}
                   style={{ paddingRight: '10px' }}
                 />
                 파트너정밀가공
               </div>
-              <div class="item">로그아웃</div>
+              <div className="item">로그아웃</div>
             </div>
           </div>
         </SideBar>
