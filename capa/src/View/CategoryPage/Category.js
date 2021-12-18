@@ -7,8 +7,10 @@ import { faSortDown } from '@fortawesome/free-solid-svg-icons';
 import Toggle from './Sections/Toggle';
 
 const CategoryContainer = styled.div`
-  width: 1540px;
+  width: 100%;
+  max-width: 1540px;
   margin: 0 auto;
+  box-sizing: border-box;
   > h2 {
     width: 100%;
     padding-top: 1rem;
@@ -40,6 +42,18 @@ const CategoryContainer = styled.div`
         color: #2096f3;
         font-size: 16px;
       }
+    }
+  }
+  @media (max-width: 1550px) {
+    padding: 0 20px;
+  }
+  @media (max-width: 600px) {
+    .category__toggle {
+      display: flex;
+      flex-direction: column;
+    }
+    .category {
+      margin-bottom: 5%;
     }
   }
 `;

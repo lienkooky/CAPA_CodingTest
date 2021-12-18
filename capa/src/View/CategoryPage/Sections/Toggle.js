@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const ToggleContainer = styled.div`
@@ -40,6 +40,27 @@ const ToggleContainer = styled.div`
   > span {
     margin-left: 20px;
     font-size: 14px;
+  }
+  @media (max-width: 600px) {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    > .toggle-circle {
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #fff;
+      border: 1px solid #eee;
+      box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+      transition: all 0.25s ease;
+      box-sizing: border-box;
+    }
+    > span {
+      margin-left: 15px;
+    }
   }
 `;
 

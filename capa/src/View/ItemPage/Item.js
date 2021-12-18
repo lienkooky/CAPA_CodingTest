@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const ItemContainer = styled.div`
-  width: 1540px;
+  width: 100%;
+  max-width: 1540px;
   margin: 0 auto;
   margin-top: 2rem;
   display: flex;
@@ -10,12 +11,14 @@ const ItemContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
   .no_item {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 1px solid #939fa5;
     width: 100%;
     height: 100px;
-    line-height: 100px;
     border-radius: 5px;
     color: #939fa5;
   }
@@ -128,6 +131,30 @@ const ItemContainer = styled.div`
       border: 1px solid #2096f3;
       color: #2096f3;
       cursor: pointer;
+    }
+  }
+
+  @media (max-width: 1550px) {
+    padding: 0 20px;
+  }
+  @media (max-width: 880px) {
+    .item__wrap {
+      display: flex;
+      width: 49%;
+      flex-direction: column;
+      &:nth-child(n) {
+        margin-bottom: 3%;
+      }
+    }
+  }
+  @media (max-width: 600px) {
+    .item__wrap {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      &:nth-child(n) {
+        margin-bottom: 4%;
+      }
     }
   }
 `;
