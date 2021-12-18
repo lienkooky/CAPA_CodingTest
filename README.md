@@ -150,3 +150,44 @@ let MaterialFlat = MaterialLong.flat(Infinity);
   <span>{el.material.length > 1 ? MaterialFlat.join(', ') : el.material}</span>
 </>;
 ```
+
+### 21.12.18
+
+<br/>
+
+> Problem
+
+- 가공방식, 재료가 2개 이상일 경우 띄어쓰기 및 쉼표해주어야 함.
+
+> Solve
+
+- 처음 시도했지만 불필요하게 전체 데이터에서 뽑아서 다시 설정함.
+
+```js
+// 가공방식, 재료가 2개 이상일 경우
+const longMethod = Data.map((el) => {
+  let result = [];
+  if (el.method.length > 1) {
+    result.push(el.method);
+  }
+  return result[0];
+});
+
+const longMaterial = Data.map((el) => {
+  let result = [];
+  if (el.material.length > 1) {
+    result.push(el.material);
+  }
+  return result[0];
+});
+
+{
+  /* 대입 결과 */
+}
+<>
+  <span>{el.method.length > 1 ? longMethod[0].join(', ') : el.method}</span>
+  <span>
+    {el.material.length > 1 ? longMaterial[1].join(', ') : el.material}
+  </span>
+</>;
+```
