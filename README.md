@@ -162,6 +162,7 @@ let MaterialFlat = MaterialLong.flat(Infinity);
 > Solve
 
 - 처음 시도했지만 불필요하게 전체 데이터에서 뽑아서 다시 설정함.
+- 선반을 클릭했을 때 배열 요소의 위치가 변경되어 filter를 이용해서 따로 배열로 넣어줌.
 
 ```js
 // 가공방식, 재료가 2개 이상일 경우
@@ -180,6 +181,7 @@ const longMaterial = Data.map((el) => {
   }
   return result[0];
 });
+longMaterial = longMaterial.filter((el) => el !== undefined);
 
 {
   /* 대입 결과 */
