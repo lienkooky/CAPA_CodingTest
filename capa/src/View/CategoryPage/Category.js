@@ -44,13 +44,18 @@ const CategoryContainer = styled.div`
   }
 `;
 
-const Category = ({ toggleHandler, isOn }) => {
+const Category = ({
+  toggleHandler,
+  isOn,
+  MethodChecked,
+  setMethodChecked,
+  MaterialChecked,
+  setMaterialChecked,
+}) => {
   const [Method, setMethod] = useState([]);
   const [Material, setMaterial] = useState([]);
   const [MethodIsOpen, setMethodIsOpen] = useState(false);
   const [MaterialIsOpen, setMaerialIsOpen] = useState(false);
-  const [MethodChecked, setMethodChecked] = useState([]);
-  const [MaterialChecked, setMaterialChecked] = useState([]);
 
   useEffect(() => {
     handleCheckBoxMethod();
@@ -149,6 +154,7 @@ const Category = ({ toggleHandler, isOn }) => {
     },
     [MaterialChecked]
   );
+
   return (
     <CategoryContainer>
       <h2>들어온 요청</h2>

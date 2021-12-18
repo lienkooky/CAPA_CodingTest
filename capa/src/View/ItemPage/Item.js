@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const ItemContainer = styled.div`
@@ -124,11 +124,43 @@ const ItemContainer = styled.div`
   }
 `;
 
-const Item = ({ AllData, isOn }) => {
-  const Selling = AllData.map((el) => el.status);
-  console.log(isOn);
+const Item = ({ AllData, isOn, MethodChecked, MaterialChecked }) => {
+  const [PlusData, setPlusData] = useState([]);
+  const [Data, setData] = useState([]);
+  const Filtered = AllData.map((el) => {
+    return {
+      id: el.id,
+      title: el.title,
+      status: el.status,
+      client: el.client,
+      due: el.due,
+      count: el.count,
+      amount: el.amount,
+      method: el.method,
+      material: el.material,
+    };
+  });
+
+  useEffect(() => {
+    setPlusData([...MaterialChecked, ...MethodChecked]);
+  }, [MaterialChecked, MethodChecked]);
+
+  useEffect(() => {
+    let result = [...Filtered];
+    result = result.filter((el) => {
+      for (let i = 0; i < PlusData.length; i++) {
+        if (PlusData[i] === '') continue;
+        if (PlusData[i] === el.method[i]) return el;
+        if (PlusData[i] === el.material[i]) return el;
+        if (PlusData[i] === el.method[i] && PlusData[i] === el.material)
+          return el;
+      }
+    });
+    setData(result);
+  }, [PlusData]);
+
   // 가공방식이 2개 이상일 경우
-  const longMethod = AllData.map((el) => {
+  const longMethod = Data.map((el) => {
     let result = [];
     if (el.method.length > 1) {
       result.push(el.method);
@@ -136,7 +168,7 @@ const Item = ({ AllData, isOn }) => {
     return result[0];
   });
 
-  const ItemTemplate = AllData.map((el) => {
+  const ItemTemplate = Data.map((el) => {
     return (
       <div className="item__wrap" key={el.id}>
         <div className="item__title">
@@ -166,7 +198,7 @@ const Item = ({ AllData, isOn }) => {
             <span>
               {el.method.length > 1 ? longMethod[0].join(', ') : el.method}
             </span>
-            <span>{el.material}</span>
+            <span>{`${el.material}`}</span>
           </div>
         </div>
         <div className="item__btn">
@@ -180,7 +212,7 @@ const Item = ({ AllData, isOn }) => {
   return (
     <ItemContainer>
       {isOn
-        ? AllData.map((el) => {
+        ? Data.map((el) => {
             if (el.status === '상담중') {
               return (
                 <div className="item__wrap" key={el.id}>
@@ -205,7 +237,7 @@ const Item = ({ AllData, isOn }) => {
                           ? longMethod[0].join(', ')
                           : el.method}
                       </span>
-                      <span>{el.material}</span>
+                      <span>{`${el.material}`}</span>
                     </div>
                   </div>
                   <div className="item__btn">

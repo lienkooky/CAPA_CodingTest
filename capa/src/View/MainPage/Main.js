@@ -7,6 +7,8 @@ import axios from 'axios';
 const Main = () => {
   const [AllData, setAllData] = useState([]);
   const [isOn, setisOn] = useState(false);
+  const [MethodChecked, setMethodChecked] = useState([]);
+  const [MaterialChecked, setMaterialChecked] = useState([]);
 
   useEffect(() => {
     handleAllData();
@@ -26,8 +28,21 @@ const Main = () => {
   return (
     <>
       <NavBar />
-      <Category toggleHandler={toggleHandler} isOn={isOn} />
-      <Item AllData={AllData} isOn={isOn} />
+      <Category
+        AllData={AllData}
+        toggleHandler={toggleHandler}
+        isOn={isOn}
+        MethodChecked={MethodChecked}
+        setMethodChecked={setMethodChecked}
+        MaterialChecked={MaterialChecked}
+        setMaterialChecked={setMaterialChecked}
+      />
+      <Item
+        AllData={AllData}
+        isOn={isOn}
+        MethodChecked={MethodChecked}
+        MaterialChecked={MaterialChecked}
+      />{' '}
     </>
   );
 };
