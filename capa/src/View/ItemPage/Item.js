@@ -168,6 +168,14 @@ const Item = ({ AllData, isOn, MethodChecked, MaterialChecked }) => {
     return result[0];
   });
 
+  const longMaterial = Data.map((el) => {
+    let result = [];
+    if (el.material.length > 1) {
+      result.push(el.material);
+    }
+    return result[0];
+  });
+
   const ItemTemplate = Data.map((el) => {
     return (
       <div className="item__wrap" key={el.id}>
@@ -198,7 +206,11 @@ const Item = ({ AllData, isOn, MethodChecked, MaterialChecked }) => {
             <span>
               {el.method.length > 1 ? longMethod[0].join(', ') : el.method}
             </span>
-            <span>{`${el.material}`}</span>
+            <span>
+              {el.material.length > 1
+                ? longMaterial[1].join(', ')
+                : el.material}
+            </span>
           </div>
         </div>
         <div className="item__btn">
@@ -237,7 +249,11 @@ const Item = ({ AllData, isOn, MethodChecked, MaterialChecked }) => {
                           ? longMethod[0].join(', ')
                           : el.method}
                       </span>
-                      <span>{`${el.material}`}</span>
+                      <span>
+                        {el.material.length > 1
+                          ? longMaterial[1].join(', ')
+                          : el.material}
+                      </span>
                     </div>
                   </div>
                   <div className="item__btn">
