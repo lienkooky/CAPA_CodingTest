@@ -50,7 +50,7 @@ const NavBar = styled.div`
     > .navbar__left {
       display: flex;
       align-items: center;
-      margin-left: 60px;
+      margin-left: 20px;
       > .navbar__logo {
         font-size: 1.1rem;
         font-weight: bold;
@@ -86,7 +86,11 @@ const Navbar = () => {
         <SideBar>
           <div id="page-wrapper" onClick={handlePageWrapperClick}></div>
           <div id="btn">
-            <FontAwesomeIcon icon={faBars} onClick={handleSideBarClick} />
+            <FontAwesomeIcon
+              icon={faBars}
+              className="btn__icon"
+              onClick={handleSideBarClick}
+            />
           </div>
           <div id="box">
             <div id="items">
@@ -125,27 +129,35 @@ const Navbar = () => {
 export default Navbar;
 
 const SideBar = styled.div`
+  display: none;
   box-sizing: border-box;
 
   #page-wrapper {
     position: fixed;
-    top: 0;
+    top: 50px;
     left: 0;
     width: 100%;
     height: 100%;
     transition: all 0.3s ease;
   }
   #page-wrapper.active {
+    top: 0;
     left: 70%;
     background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
   }
 
   #btn {
-    position: fixed;
+    display: inline-block;
     z-index: 1;
-    top: 15px;
-    left: 15px;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
     cursor: pointer;
+    .btn__icon {
+      width: 20px;
+      height: 20px;
+    }
   }
 
   #box {
@@ -191,5 +203,8 @@ const SideBar = styled.div`
         padding-top: 30px;
       }
     }
+  }
+  @media (max-width: 600px) {
+    display: block;
   }
 `;

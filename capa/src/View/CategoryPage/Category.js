@@ -34,9 +34,7 @@ const CategoryContainer = styled.div`
       color: #58b0f6;
       font-size: 12px;
       cursor: pointer;
-      &:hover {
-        transform: scale(1.1);
-      }
+
       > .reset {
         margin-right: 10px;
         color: #2096f3;
@@ -54,6 +52,9 @@ const CategoryContainer = styled.div`
     }
     .category {
       margin-bottom: 5%;
+      .filtering {
+        width: 20%;
+      }
     }
   }
 `;

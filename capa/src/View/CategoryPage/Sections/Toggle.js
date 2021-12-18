@@ -6,7 +6,6 @@ const ToggleContainer = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
-
   cursor: pointer;
   > .toggle-container {
     width: 40px;
@@ -14,7 +13,6 @@ const ToggleContainer = styled.div`
     border-radius: 30px;
     background-color: #c2c2c2;
     transition: all 0.2s ease;
-
     &.toggle--checked {
       background-color: #badefb;
     }
@@ -45,6 +43,7 @@ const ToggleContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: left;
+    width: 50%;
     > .toggle-circle {
       position: absolute;
       top: -1px;

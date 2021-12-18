@@ -193,3 +193,39 @@ longMaterial = longMaterial.filter((el) => el !== undefined);
   </span>
 </>;
 ```
+
+<br/>
+
+> Problem
+
+- 사이드바 만들 때 외부 영역 클릭하면 사이드바 닫힘 현상.
+
+> Solve
+
+- 전체 영역을 따로 만들어줌으로써 해결함
+
+```js
+<SideBar>
+  <div id="page-wrapper" onClick={handlePageWrapperClick}></div>
+  <div id="btn">
+    <FontAwesomeIcon
+      icon={faBars}
+      className="btn__icon"
+      onClick={handleSideBarClick}
+    />
+  </div>
+  <div id="box">
+    <div id="items">
+      <div className="item__title">
+        <div className="item__logo">CAPA</div>
+        <div className="item__name"> 파트너스</div>
+      </div>
+      <div class="item">
+        <FontAwesomeIcon icon={faGopuram} style={{ paddingRight: '10px' }} />
+        파트너정밀가공
+      </div>
+      <div class="item">로그아웃</div>
+    </div>
+  </div>
+</SideBar>
+```
