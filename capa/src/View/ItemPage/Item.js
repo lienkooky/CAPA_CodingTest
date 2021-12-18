@@ -10,7 +10,15 @@ const ItemContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
+  .no_item {
+    text-align: center;
+    border: 1px solid #939fa5;
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    border-radius: 5px;
+    color: #939fa5;
+  }
   .item__wrap {
     width: 32.6%;
     padding: 20px;
@@ -159,7 +167,7 @@ const Item = ({ AllData, isOn, MethodChecked, MaterialChecked }) => {
     setData(result);
   }, [PlusData]);
 
-  // 가공방식이 2개 이상일 경우
+  // 가공방식, 재료가 2개 이상일 경우
   const longMethod = Data.map((el) => {
     let result = [];
     if (el.method.length > 1) {
@@ -168,13 +176,14 @@ const Item = ({ AllData, isOn, MethodChecked, MaterialChecked }) => {
     return result[0];
   });
 
-  const longMaterial = Data.map((el) => {
+  let longMaterial = Data.map((el) => {
     let result = [];
     if (el.material.length > 1) {
       result.push(el.material);
     }
     return result[0];
   });
+  longMaterial = longMaterial.filter((el) => el !== undefined);
 
   const ItemTemplate = Data.map((el) => {
     return (
@@ -208,7 +217,7 @@ const Item = ({ AllData, isOn, MethodChecked, MaterialChecked }) => {
             </span>
             <span>
               {el.material.length > 1
-                ? longMaterial[1].join(', ')
+                ? longMaterial[0].join(', ')
                 : el.material}
             </span>
           </div>
@@ -223,48 +232,52 @@ const Item = ({ AllData, isOn, MethodChecked, MaterialChecked }) => {
 
   return (
     <ItemContainer>
-      {isOn
-        ? Data.map((el) => {
-            if (el.status === '상담중') {
-              return (
-                <div className="item__wrap" key={el.id}>
-                  <div className="item__title">
-                    <h3>{el.title}</h3>
-                    <span className="item__counselling">{el.status}</span>
-                    <span className="item__customer">{el.client}</span>
-                    <span className="item__time">{el.due}까지 납기</span>
+      {Data.length === 0 ? (
+        <div className="no_item">조건에 맞는 견적 요청이 없습니다.</div>
+      ) : isOn ? (
+        Data.map((el) => {
+          if (el.status === '상담중') {
+            return (
+              <div className="item__wrap" key={el.id}>
+                <div className="item__title">
+                  <h3>{el.title}</h3>
+                  <span className="item__counselling">{el.status}</span>
+                  <span className="item__customer">{el.client}</span>
+                  <span className="item__time">{el.due}까지 납기</span>
+                </div>
+                <div className="item__content">
+                  <div className="item__content__name">
+                    <span>도면개수</span>
+                    <span>총 수량</span>
+                    <span>가공방식</span>
+                    <span>재료</span>
                   </div>
-                  <div className="item__content">
-                    <div className="item__content__name">
-                      <span>도면개수</span>
-                      <span>총 수량</span>
-                      <span>가공방식</span>
-                      <span>재료</span>
-                    </div>
-                    <div className="item__content__amount">
-                      <span>{el.count}개</span>
-                      <span>{el.amount}개</span>
-                      <span>
-                        {el.method.length > 1
-                          ? longMethod[0].join(', ')
-                          : el.method}
-                      </span>
-                      <span>
-                        {el.material.length > 1
-                          ? longMaterial[1].join(', ')
-                          : el.material}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="item__btn">
-                    <button className="item__btn__more">요청 내역 보기</button>
-                    <button className="item__btn__chat">채팅하기</button>
+                  <div className="item__content__amount">
+                    <span>{el.count}개</span>
+                    <span>{el.amount}개</span>
+                    <span>
+                      {el.method.length > 1
+                        ? longMethod[0].join(', ')
+                        : el.method}
+                    </span>
+                    <span>
+                      {el.material.length > 1
+                        ? longMaterial[0].join(', ')
+                        : el.material}
+                    </span>
                   </div>
                 </div>
-              );
-            }
-          })
-        : ItemTemplate}
+                <div className="item__btn">
+                  <button className="item__btn__more">요청 내역 보기</button>
+                  <button className="item__btn__chat">채팅하기</button>
+                </div>
+              </div>
+            );
+          }
+        })
+      ) : (
+        ItemTemplate
+      )}
     </ItemContainer>
   );
 };
